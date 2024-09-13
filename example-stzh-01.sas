@@ -23,7 +23,11 @@ LIMIT 10
 querymethod=queryGET,
 resultdsn=query,
 sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
-debug=Y
+debug=Y,
+proxyusername = &proxyusername,
+proxypassword = &proxypassword,
+proxyport = &proxyport,
+proxyhost = &proxyhost
 );
 
 proc print data=query width=min;

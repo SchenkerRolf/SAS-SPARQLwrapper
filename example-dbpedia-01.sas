@@ -22,7 +22,11 @@ WHERE { <http://dbpedia.org/resource/Bern> dbo:mayor ?abstr.
 querymethod=queryGET,
 resultdsn=query,
 sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
-debug=Y
+debug=Y,
+proxyusername = &proxyusername,
+proxypassword = &proxypassword,
+proxyport = &proxyport,
+proxyhost = &proxyhost
 );
 
 proc print data=query width=min;
