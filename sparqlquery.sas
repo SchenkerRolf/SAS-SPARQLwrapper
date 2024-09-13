@@ -37,6 +37,10 @@ showresponse: flag for showing the return response, default Y
     showresponse=Y,
     webpassword=,
     webusername=
+    proxyhost=,
+    proxyport=,
+    proxyusername=,
+    proxypassword=,
     );
 
 %local urlparam;
@@ -82,6 +86,33 @@ showresponse: flag for showing the return response, default Y
             %end;
 %end;
 
+/* check consistency of proxyhost and proxyport */
+%if ("&proxyhost" == "" and "&proxyport" ^= "") or ("&proxyhost" ^= "" and "&proxyport" == "") %then %do;
+    %putlog sparqlquery: Please specify both proxyhost and proxyport or neither.;
+    %if %qupcase(&problemHandling.)=ABORTCANCEL %then %do;
+        data _null_;
+            abort cancel;
+            run;
+            %end;
+        %else %do;
+            %return;
+            %end;
+%end;
+
+/* check consistency of proxyusername and proxypassword */
+%if ("&proxyusername" == "" and "&proxypassword" ^= "") or ("&proxyusername" ^= "" and "&proxypassword" == "") %then %do;
+    %putlog sparqlquery: Please specify both proxyusername and proxypassword or neither.;
+    %if %qupcase(&problemHandling.)=ABORTCANCEL %then %do;
+        data _null_;
+            abort cancel;
+            run;
+            %end;
+        %else %do;
+            %return;
+            %end;
+%end;
+
+
 /* ===== setup for authentication (webusername, webpassword)  ===== */
 %let auth = ;
 
@@ -89,6 +120,17 @@ showresponse: flag for showing the return response, default Y
     %let auth = webpassword="&webpw" webusername="&webuser";
 %end;
 
+
+/* ===== setup for proxy (host, port, username and password for proxy)  ===== */
+%let proxy_a = ;
+%let proxy_b = ;
+
+%if ("&proxyhost" ^= "") %then %do;
+    %let proxy_a = proxyhost="&proxyhost" proxyport=&proxyport;
+%end;
+%if ("&proxyusername" ^= "") %then %do;
+    %let proxy_b = proxyusername="&proxyusername" proxypassword="&proxypassword";
+%end;
 
 /* ===== setup for PROC HTTP call  ===== */
 
@@ -147,7 +189,7 @@ proc http
     headerin=hdrin  
     headerout=hdrout
     ct="application/sparql-query" 
-    &auth
+    &auth &proxy_a &proxy_b
 ;
 run;
 %end;
@@ -179,7 +221,7 @@ proc http
     headerin=hdrin  
     headerout=hdrout
     ct="application/sparql-query" 
-    &auth
+    &auth &proxy_a &proxy_b
 ;
 run;
 %end;
@@ -200,7 +242,7 @@ proc http
     url="&endpoint.?query=%superq(urlparam)%nrstr(&)%nrstr(output=xml)"
     method="get"
     headerout=hdrout
-    &auth
+    &auth &proxy_a &proxy_b
 ;
 run;
 %end;
@@ -237,7 +279,7 @@ proc http
     url="&endpoint.?query=%superq(urlparam)%nrstr(&)%nrstr(output=xml)"
     method="get"
     headerout=hdrout
-    &auth
+    &auth &proxy_a &proxy_b
 ;
 run;
 
