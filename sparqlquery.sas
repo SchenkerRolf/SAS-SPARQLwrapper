@@ -34,7 +34,9 @@ showresponse: flag for showing the return response, default Y
     problemHandling=ABORTCANCEL,
     debug=N,
     debug_nohttp=N,
-    showresponse=Y        
+    showresponse=Y,
+    webpassword=,
+    webusername=
     );
 
 %local urlparam;
@@ -66,6 +68,27 @@ showresponse: flag for showing the return response, default Y
             %return;
             %end;
 %end;
+
+/* check consistency of webusername and webpassword */
+%if ("&webusername" == "" and "&webpassword" ^= "") or ("&webusername" ^= "" and "&webpassword" == "") %then %do;
+    %putlog sparqlquery: Please specify both webusername and webpassword or neither.;
+    %if %qupcase(&problemHandling.)=ABORTCANCEL %then %do;
+        data _null_;
+            abort cancel;
+            run;
+            %end;
+        %else %do;
+            %return;
+            %end;
+%end;
+
+/* ===== setup for authentication (webusername, webpassword)  ===== */
+%let auth = ;
+
+%if ("&webusername" ^= "") %then %do;
+    %let auth = webpassword="&webpw" webusername="&webuser";
+%end;
+
 
 /* ===== setup for PROC HTTP call  ===== */
 
@@ -124,6 +147,7 @@ proc http
     headerin=hdrin  
     headerout=hdrout
     ct="application/sparql-query" 
+    &auth
 ;
 run;
 %end;
@@ -155,6 +179,7 @@ proc http
     headerin=hdrin  
     headerout=hdrout
     ct="application/sparql-query" 
+    &auth
 ;
 run;
 %end;
@@ -175,6 +200,7 @@ proc http
     url="&endpoint.?query=%superq(urlparam)%nrstr(&)%nrstr(output=xml)"
     method="get"
     headerout=hdrout
+    &auth
 ;
 run;
 %end;
@@ -211,6 +237,7 @@ proc http
     url="&endpoint.?query=%superq(urlparam)%nrstr(&)%nrstr(output=xml)"
     method="get"
     headerout=hdrout
+    &auth
 ;
 run;
 
