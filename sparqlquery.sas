@@ -36,7 +36,7 @@ showresponse: flag for showing the return response, default Y
     debug_nohttp=N,
     showresponse=Y,
     webpassword=,
-    webusername=
+    webusername=,
     proxyhost=,
     proxyport=,
     proxyusername=,

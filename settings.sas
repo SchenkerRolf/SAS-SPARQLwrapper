@@ -1,15 +1,25 @@
-* Step 1: Encoding the Password;
+* Encode passwords;
 
-proc pwencode in='myAuthPassword'; run; 
+proc pwencode in='webpw'; run; 
 %let webpw = &_pwencode;
 
-proc pwencode in='myProxyPassword'; run; 
+proc pwencode in='proxypw'; run; 
 %let proxypassword = &_pwencode;
 
-%let webuser = myAuthUser;
 
-%let proxyhost = myProxyHost;
-%let proxyport = myProxyPort;
-%let proxyusername = myProxyUsername
 
-%let localprojectpath = myProjectPath;
+* Set other variables;
+
+%let webuser = demo;
+
+%let proxyhost = proxyhost;
+%let proxyport = 1234;
+%let proxyusername = proxyname;
+
+
+
+* Set path with helper files;
+* sparqlreadxml.sas, sparqlquery.sas as well as ;
+* example-dbpedia-01.sas, example-stzh-01.sas, example-dbpedia-file.sas and example-stzuerich-file.sas;
+
+%let helperPath = c:\sas\;

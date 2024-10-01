@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------------*\
-** Program : example-dbpedia-01.sas
-** Purpose : Basic test of SAS-SPARQLwrapper
-** Endpoint: dbpedia    
+** Program : example-lindas-file.sas
+** Purpose : Basic test of SAS-SPARQLwrapper using a query file
+** Endpoint: https://ld.stadt-zuerich.ch/query
 ** Notes: SAS must be invoked with unicode support   
 ** Status: ok    
 \*------------------------------------------------------------------------*/
@@ -11,17 +11,11 @@ options mprint mlogic nocenter;
 %include "&helperPath.sparqlquery.sas";
 
 %sparqlquery(
-endpoint=http://dbpedia.org/sparql,
-query=%str(
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dbo: <http://dbpedia.org/ontology/>
-SELECT  ?abstr
-WHERE { <http://dbpedia.org/resource/Bern> dbo:mayor ?abstr.
-    }
-),
+endpoint=https://ld.stadt-zuerich.ch/query,
+queryfile=&localprojectpath.query_stzh.rq,
 querymethod=queryGET,
-resultdsn=query_dbpedia_01,
-sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
+resultdsn=query_stzh_file,
+sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,
 proxypassword = &proxypassword,
