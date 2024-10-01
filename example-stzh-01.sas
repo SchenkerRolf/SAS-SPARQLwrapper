@@ -21,7 +21,7 @@ SELECT * WHERE {
 LIMIT 10
 ),
 querymethod=queryGET,
-resultdsn=query,
+resultdsn=query_stzh_01,
 sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,

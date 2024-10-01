@@ -14,7 +14,7 @@ options mprint mlogic nocenter;
 endpoint=https://ld.stadt-zuerich.ch/query,
 queryfile=&localprojectpath.query_lindas.rq,
 querymethod=queryGET,
-resultdsn=query,
+resultdsn=query_stzh_file,
 sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,
