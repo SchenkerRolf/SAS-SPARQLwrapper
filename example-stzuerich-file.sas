@@ -8,14 +8,14 @@
 
 options mprint mlogic nocenter;
 
-%include "&localprojectpath.sparqlquery.sas";
+%include "&helperPath.sparqlquery.sas";
 
 %sparqlquery(
 endpoint=https://ld.stadt-zuerich.ch/query,
 queryfile=&localprojectpath.query_stzh.rq,
 querymethod=queryGET,
 resultdsn=query_stzh_file,
-sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
+sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,
 proxypassword = &proxypassword,

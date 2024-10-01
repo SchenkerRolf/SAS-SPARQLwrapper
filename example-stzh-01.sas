@@ -8,7 +8,7 @@
 
 options mprint mlogic nocenter;
 
-%include "&localprojectpath.sparqlquery.sas";
+%include "&helperPath.sparqlquery.sas";
 
 %sparqlquery(
 endpoint=https://ld.stadt-zuerich.ch/query,

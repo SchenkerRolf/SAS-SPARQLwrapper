@@ -8,14 +8,14 @@
 
 options mprint mlogic nocenter;
 
-%include "&localprojectpath.sparqlquery.sas";
+%include "&helperPath.sparqlquery.sas";
 
 %sparqlquery(
 endpoint=http://dbpedia.org/sparql,
 queryfile=&localprojectpath.query_dbpedia.rq,
 querymethod=queryGET,
 resultdsn=query_dbpedia_file,
-sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
+sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,
 proxypassword = &proxypassword,
