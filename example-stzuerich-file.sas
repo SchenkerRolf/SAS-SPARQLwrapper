@@ -23,5 +23,5 @@ proxyport = &proxyport,
 proxyhost = &proxyhost
 );
 
-proc print data=query width=min;
+proc print data=sq width=min;
 run;
