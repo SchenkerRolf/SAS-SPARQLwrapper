@@ -8,8 +8,6 @@
 
 options mprint mlogic nocenter;
 
-%include "&helperPath.sparqlquery.sas";
-
 %sparqlquery(
 endpoint=https://ld.stadt-zuerich.ch/query,
 queryfile=&helperPath.query_stzh.rq,

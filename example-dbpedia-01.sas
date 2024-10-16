@@ -8,8 +8,6 @@
 
 options mprint mlogic nocenter;
 
-%include "&helperPath.sparqlquery.sas";
-
 %sparqlquery(
 endpoint=http://dbpedia.org/sparql,
 query=%str(

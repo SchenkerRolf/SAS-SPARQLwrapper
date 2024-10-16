@@ -23,3 +23,7 @@ proc pwencode in='proxypw'; run;
 * example-dbpedia-01.sas, example-stzh-01.sas, example-dbpedia-file.sas and example-stzuerich-file.sas;
 
 %let helperPath = c:\sas\;
+
+
+%include "&helperPath.sparqlquery.sas";
+%include "&helperPath.sparqlreadxml.sas";
