@@ -12,7 +12,7 @@ options mprint mlogic nocenter;
 
 %sparqlquery(
 endpoint=http://dbpedia.org/sparql,
-queryfile=&localprojectpath.query_dbpedia.rq,
+queryfile=&helperPath.query_dbpedia.rq,
 querymethod=queryGET,
 resultdsn=query_dbpedia_file,
 sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,

@@ -21,7 +21,7 @@ WHERE { <http://dbpedia.org/resource/Bern> dbo:mayor ?abstr.
 ),
 querymethod=queryGET,
 resultdsn=query_dbpedia_01,
-sparqlquerysxlemap=&localprojectpath.sparqlquery-sxlemap.map,
+sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,
 debug=Y,
 proxyusername = &proxyusername,
 proxypassword = &proxypassword,

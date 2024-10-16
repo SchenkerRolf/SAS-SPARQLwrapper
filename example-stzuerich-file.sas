@@ -12,7 +12,7 @@ options mprint mlogic nocenter;
 
 %sparqlquery(
 endpoint=https://ld.stadt-zuerich.ch/query,
-queryfile=&localprojectpath.query_stzh.rq,
+queryfile=&helperPath.query_stzh.rq,
 querymethod=queryGET,
 resultdsn=query_stzh_file,
 sparqlquerysxlemap=&helperPath.sparqlquery-sxlemap.map,
